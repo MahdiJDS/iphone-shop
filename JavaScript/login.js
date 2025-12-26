@@ -23,33 +23,42 @@ swich.forEach((btn) => {
 
 
 // Register
-function regasterf(event) {
-    event.preventDefault(); // جلوگیری از ریلود شدن صفحه
-    const pasR = document.getElementById('pasR').value;
-    const nameR = document.getElementById('nameR').value;
-    const phone = document.getElementById('phone').value;
-    let isphone = /^09\d{9}$/;
-    console.log(phone);
-    console.log(isphone.test(phone));
-    if (nameR, pasR, isphone.test(phone)) {
-        if (localStorage.getItem(nameR)) {
-            pR.textContent = `کاربر ${nameR} قبلاً ثبت شده است!`;
-            setTimeout(() => {
-                Toggle();
-            }, 1000);
-        }
-        else {
-            localStorage.setItem(nameR, pasR);
-            pR.textContent = `کاربر ${nameR} با موفقیت ثبت شد!`;
-            setTimeout(() => {
-                Toggle();
-            }, 1000);
-        }
-    }
+function handleRegister(event) {
+  event.preventDefault();
+
+  const usernameInput = document.getElementById('nameR');
+  const passwordInput = document.getElementById('pasR');
+  const phoneInput = document.getElementById('phone');
+  const messageEl = document.getElementById('pR');
+
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
+  const phone = phoneInput.value.trim();
+
+  const PHONE_REGEX = /^09\d{9}$/;
+
+  // Validation
+  if (!username || !password || !PHONE_REGEX.test(phone)) {
+    messageEl.textContent = 'لطفاً همه فیلدها را به‌درستی پر کنید!';
+    return;
+  }
+
+  // Check existing user
+  if (localStorage.getItem(username)) {
+    messageEl.textContent = `کاربر ${username} قبلاً ثبت شده است!`;
+    setTimeout(Toggle, 1000);
+    return;
+  }
+
+  // Save user
+  localStorage.setItem(username, password);
+  messageEl.textContent = `کاربر ${username} با موفقیت ثبت شد!`;
+
+  setTimeout(Toggle, 1000);
 }
 
-btnregaster.addEventListener('click', regasterf);
-btnregaster.addEventListener('click', sasPhone);
+btnregaster.addEventListener('click', handleRegister);
+
 
 // Login
 function handleLogin(event) {
