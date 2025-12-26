@@ -62,20 +62,23 @@ function addtocart(button) {
 }
 
 //راستی ازمایی ورود 
-const islog = document.getElementById('islogin');
-islog.addEventListener('click', () => {
-    const isloging = localStorage.getItem('isloginA');
-    console.log(isloging)
-    if (isloging === 'true') {
-        window.location.href = "checkoytBS.html";
-    }
-    else {
-        alert("ثبت نام نکرده اید");
-        console.log("کاربر وارد نشده است. هدایت به صفحه ثبت‌نام...");
-        window.location.href = "loginBS.html";
+const loginButton = document.getElementById('islogin');
 
-    }
-})
+loginButton.addEventListener('click', () => {
+  const isLoggedIn = localStorage.getItem('isloginA') === 'true';
+
+  console.log('Login status:', isLoggedIn);
+
+  if (isLoggedIn) {
+    window.location.href = 'checkoytBS.html';
+    return;
+  }
+
+  alert('ثبت‌نام نکرده‌اید');
+  console.warn('User is not logged in. Redirecting to login page...');
+  window.location.href = 'loginBS.html';
+});
+
 
 //تایپو گرافی
 const type = document.querySelector('.typing');
