@@ -79,16 +79,25 @@ function loginf(event) {
 btnlogin.addEventListener('click', loginf);
 
 //سانسور شماره   
-function sasPhone() {
-    const phone = document.getElementById('phone').value;
-    let isphone = /^09\d{9}$/;
-    console.log(isphone.test(phone));
+function validateAndMaskPhone() {
+  const phoneInput = document.getElementById('phone');
+  const phoneNumber = phoneInput.value.trim();
 
-    if (!isphone.test(phone)) {
-        alert(`شماره تلفن معتبر وارد کنید!!`);
-        return;
-    } else {
-        const sas = phone.replace(/(\d{4})\d{3}(\d{4})/, "$1***$2");
-        alert(sas);
-    }
+  const PHONE_REGEX = /^09\d{9}$/;
+  const isValidPhone = PHONE_REGEX.test(phoneNumber);
+
+  console.log('Phone valid:', isValidPhone);
+
+  if (!isValidPhone) {
+    alert('شماره تلفن معتبر وارد کنید!');
+    phoneInput.focus();
+    return;
+  }
+
+  const maskedPhone = phoneNumber.replace(
+    /(\d{4})\d{3}(\d{4})/,
+    '$1***$2'
+  );
+
+  alert(maskedPhone);
 }
