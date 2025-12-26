@@ -1,43 +1,60 @@
-function show() {
-    const contact = document.querySelector('.cart-contact');
-    // localStorage.clear();
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+function renderCart() {
+  const cartContainer = document.querySelector('.cart-contact');
+  const totalPriceEl = document.querySelector('.cart-price');
 
+  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
-    contact.innerHTML = "";
-    if (cart.length === 0) {
-        contact.innerHTML = `<p class="fw-bold"> سبد خالی میباشد </p>`;
-        return;
-    }
-    else {
-        cart.forEach(item => {
-            const div = document.createElement('div');
-            div.classList.add('card', 'p-3', 'text-center', 'm-3');
-            if (item.query >= 1) {
-                div.innerHTML = ` <div class="d-flex justify-content-center">
-                                          <button onclick="removeitem('${item.id}')" class="btn btn-outline-danger m-2">حذف</button>
-                                          <p class="m-2"> ${item.name} - قیمت : ${item.price} - تعداد :${item.query} </p>
-                                          <button onclick="update('${item.id}', 1)"class="btn btn-outline-primary m-2">+</button>                                   
-                                          <button onclick="update('${item.id}', -1)"class="btn btn-outline-info m-2">-</button>
-                                          </div>
-                                      `;
-                contact.appendChild(div);
-             
+  cartContainer.innerHTML = '';
 
+  if (cartItems.length === 0) {
+    cartContainer.innerHTML = '<p class="fw-bold">سبد خالی می‌باشد</p>';
+    totalPriceEl.textContent = '';
+    return;
+  }
 
-            }
-        });
+  let totalPrice = 0;
 
+  cartItems.forEach(item => {
+    if (item.quantity < 1) return;
 
-        let total = 0;
-        cart.forEach(item => {
-            if (item.query >= 1) {
-                total += item.price * item.query;
-            }
-        })
-      
-        document.querySelector('.cart-price').innerHTML = `مجموع قیمت = ${total}`;
-    };
+    totalPrice += item.price * item.quantity;
+
+    const card = document.createElement('div');
+    card.className = 'card p-3 text-center m-3';
+
+    card.innerHTML = `
+      <div class="d-flex justify-content-center align-items-center gap-2">
+        <button
+          class="btn btn-outline-danger"
+          onclick="removeItem('${item.id}')"
+        >
+          حذف
+        </button>
+
+        <p class="m-0">
+          ${item.name} - قیمت: ${item.price} - تعداد: ${item.quantity}
+        </p>
+
+        <button
+          class="btn btn-outline-primary"
+          onclick="updateItem('${item.id}', 1)"
+        >
+          +
+        </button>
+
+        <button
+          class="btn btn-outline-info"
+          onclick="updateItem('${item.id}', -1)"
+        >
+          -
+        </button>
+      </div>
+    `;
+
+    cartContainer.appendChild(card);
+  });
+
+  totalPriceEl.textContent = `مجموع قیمت = ${totalPrice}`;
 }
 
 function removeitem(itemid) {
