@@ -2,23 +2,30 @@
 
 
 //نمایش محتوا اسکرول
+const VISIBILITY_OFFSET = 50;
 
-function anime() {
-    const sections = document.querySelectorAll('section');
-    const windos = window.innerHeight;
+function handleSectionVisibility() {
+  const sections = document.querySelectorAll('section');
+  const viewportHeight = window.innerHeight;
 
-    sections.forEach(section => {
-        const root = section.getBoundingClientRect();
-        if (root.top <= windos - 50 && root.bottom >= 50) {
-            section.classList.add('visible');
-        } else {
-            section.classList.remove('visible');
-        }
-    });
+  sections.forEach(section => {
+    const { top, bottom } = section.getBoundingClientRect();
+
+    const isVisible =
+      top <= viewportHeight - VISIBILITY_OFFSET &&
+      bottom >= VISIBILITY_OFFSET;
+
+    section.classList.toggle('visible', isVisible);
+  });
 }
-window.addEventListener('load', anime); // برای لود صفحه
-window.addEventListener('scroll', anime); // برای اسکرول
-anime();
+
+// Run on initial load and scroll
+window.addEventListener('load', handleSectionVisibility);
+window.addEventListener('scroll', handleSectionVisibility);
+
+// Initial check (for safety)
+handleSectionVisibility();
+
 
 
 //سبد خرید
