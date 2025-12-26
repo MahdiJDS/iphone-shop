@@ -52,29 +52,35 @@ btnregaster.addEventListener('click', regasterf);
 btnregaster.addEventListener('click', sasPhone);
 
 // Login
-function loginf(event) {
-    event.preventDefault();
-    const nameL = document.getElementById('nameL').value;
-    const pasL = document.getElementById('pasL').value;
+function handleLogin(event) {
+  event.preventDefault();
 
-    const paslocal = localStorage.getItem(nameL);
-    if (nameL, pasL) {
+  const usernameInput = document.getElementById('nameL');
+  const passwordInput = document.getElementById('pasL');
+  const messageEl = document.getElementById('pL');
 
-        if (paslocal === pasL) {
-            pL.textContent = "ورود موفقیت‌آمیز بود!";
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 1000);
-        } else {
-            pL.textContent = "نام کاربری یا رمز عبور اشتباه است!";
-        };
-    } else {
-        pL.innerHTML = "فیلد ورودی خالی میباشد!!"
-    }
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
 
+  if (!username || !password) {
+    messageEl.textContent = 'فیلدهای ورودی نباید خالی باشند!';
+    return;
+  }
+
+  const storedPassword = localStorage.getItem(username);
+
+  if (storedPassword === password) {
+    messageEl.textContent = 'ورود موفقیت‌آمیز بود!';
     localStorage.setItem('isloginA', 'true');
 
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 1000);
+  } else {
+    messageEl.textContent = 'نام کاربری یا رمز عبور اشتباه است!';
+  }
 }
+
 
 btnlogin.addEventListener('click', loginf);
 
