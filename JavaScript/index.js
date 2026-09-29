@@ -128,7 +128,7 @@ function BarScroll() {
         progressBar.style.width = '0%';
         return;
     }
-    
+
     const up = (topsrtoll / higthscroll) * 100;
     progressBar.style.width = `${up}%`;
 }
@@ -138,17 +138,32 @@ window.addEventListener('scroll', BarScroll);
 
 //نوبار متعییر
 const nav = document.getElementById('nav');
-let lastscrool = 0;
-window.addEventListener('scroll', () => {
-    const height = window.scrollY;
-    if (height > lastscrool) {
-        nav.classList.add('hidden')
+
+let lastScrollY = window.scrollY;
+
+function updateNavbar() {
+    if (!nav) {
+        return;
+    }
+
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY <= 0) {
+        nav.classList.remove('hidden');
+        lastScrollY = 0;
+        return;
+    }
+
+    if (currentScrollY > lastScrollY) {
+        nav.classList.add('hidden');
     } else {
         nav.classList.remove('hidden');
     }
 
-    lastscrool = height;
-});
+    lastScrollY = currentScrollY;
+}
+
+window.addEventListener('scroll', updateNavbar);
 
 
 //search
