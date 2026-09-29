@@ -6,17 +6,17 @@ const VISIBILITY_OFFSET = 50;
 const sections = document.querySelectorAll('section');
 
 function handleSectionVisibility() {
-  const viewportHeight = window.innerHeight;
+    const viewportHeight = window.innerHeight;
 
-  sections.forEach(section => {
-    const { top, bottom } = section.getBoundingClientRect();
+    sections.forEach(section => {
+        const { top, bottom } = section.getBoundingClientRect();
 
-    const isVisible =
-      top <= viewportHeight - VISIBILITY_OFFSET &&
-      bottom >= VISIBILITY_OFFSET;
+        const isVisible =
+            top <= viewportHeight - VISIBILITY_OFFSET &&
+            bottom >= VISIBILITY_OFFSET;
 
-    section.classList.toggle('visible', isVisible);
-  });
+        section.classList.toggle('visible', isVisible);
+    });
 }
 
 // Run on initial load and scroll
@@ -123,6 +123,12 @@ const progressBar = document.getElementById('progress-bar');
 function BarScroll() {
     const topsrtoll = window.scrollY;
     const higthscroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+    if (scrollableHeight <= 0) {
+        progressBar.style.width = '0%';
+        return;
+    }
+    
     const up = (topsrtoll / higthscroll) * 100;
     progressBar.style.width = `${up}%`;
 }
@@ -147,7 +153,6 @@ window.addEventListener('scroll', () => {
 
 //search
 const search = document.getElementById('search');
-const sections = document.querySelectorAll('section');
 const sugest = document.querySelector('.sugest');
 
 const Products = ['intro', 'reviews', 'insert', 'call', 'rate', 'pricing'];
