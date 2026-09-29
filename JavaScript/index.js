@@ -3,9 +3,9 @@
 
 //نمایش محتوا اسکرول
 const VISIBILITY_OFFSET = 50;
+const sections = document.querySelectorAll('section');
 
 function handleSectionVisibility() {
-  const sections = document.querySelectorAll('section');
   const viewportHeight = window.innerHeight;
 
   sections.forEach(section => {
