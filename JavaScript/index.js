@@ -64,20 +64,21 @@ function addtocart(button) {
 //راستی ازمایی ورود 
 const loginButton = document.getElementById('islogin');
 
-loginButton.addEventListener('click', () => {
-  const isLoggedIn = localStorage.getItem('isloginA') === 'true';
+if (loginButton) {
+    loginButton.addEventListener('click', () => {
+        const isLoggedIn =
+            localStorage.getItem('isloginA') === 'true';
 
-  console.log('Login status:', isLoggedIn);
+        if (isLoggedIn) {
+            window.location.href = 'checkoytBS.html';
+            return;
+        }
 
-  if (isLoggedIn) {
-    window.location.href = 'checkoytBS.html';
-    return;
-  }
+        alert('ثبت‌نام نکرده‌اید');
 
-  alert('ثبت‌نام نکرده‌اید');
-  console.warn('User is not logged in. Redirecting to login page...');
-  window.location.href = 'loginBS.html';
-});
+        window.location.href = 'loginBS.html';
+    });
+}
 
 
 //تایپو گرافی
