@@ -200,6 +200,29 @@ function showSuggestions(products) {
     });
 }
 
+function handleSearch() {
+    if (!searchInput || !suggestionBox) {
+        return;
+    }
+
+    const query = searchInput.value
+        .trim()
+        .toLowerCase();
+
+    if (!query) {
+        suggestionBox.innerHTML = '';
+        suggestionBox.style.display = 'none';
+        return;
+    }
+
+    const filteredProducts = productSections.filter(
+        (product) =>
+            product.toLowerCase().startsWith(query)
+    );
+
+    showSuggestions(filteredProducts);
+}
+
 const search = document.getElementById('search');
 const sugest = document.querySelector('.sugest');
 
