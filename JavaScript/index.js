@@ -167,10 +167,45 @@ window.addEventListener('scroll', updateNavbar);
 
 
 //search
+
+function showSuggestions(products) {
+    if (!suggestionBox) {
+        return;
+    }
+
+    suggestionBox.innerHTML = '';
+
+    if (products.length === 0) {
+        suggestionBox.style.display = 'none';
+        return;
+    }
+
+    suggestionBox.style.display = 'block';
+
+    products.forEach((product) => {
+        const listItem = document.createElement('li');
+
+        listItem.textContent = product;
+
+        listItem.addEventListener('click', () => {
+            searchInput.value = product;
+
+            suggestionBox.innerHTML = '';
+            suggestionBox.style.display = 'none';
+
+            scrollToSection(product);
+        });
+
+        suggestionBox.appendChild(listItem);
+    });
+}
+
 const search = document.getElementById('search');
 const sugest = document.querySelector('.sugest');
 
 const Products = ['intro', 'reviews', 'insert', 'call', 'rate', 'pricing'];
+
+
 
 search.addEventListener('keyup', () => {
     const query = search.value.toLowerCase();
