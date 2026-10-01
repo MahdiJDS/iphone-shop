@@ -236,10 +236,21 @@ function scrollToSection(sectionId) {
     });
 }
 
-const search = document.getElementById('search');
-const sugest = document.querySelector('.sugest');
+const searchInput = document.getElementById('search');
+const suggestionBox = document.querySelector('.sugest');
 
-const Products = ['intro', 'reviews', 'insert', 'call', 'rate', 'pricing'];
+const productSections = [
+    'intro',
+    'reviews',
+    'insert',
+    'call',
+    'rate',
+    'pricing',
+];
+
+if (searchInput) {
+    searchInput.addEventListener('input', handleSearch);
+}
 
 
 
