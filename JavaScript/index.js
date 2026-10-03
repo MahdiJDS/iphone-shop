@@ -31,7 +31,6 @@ handleSectionVisibility();
 //سبد خرید
 function addtocart(button) {
     const parent = button.parentElement;
-    console.log(parent);
     const itemid = parent.getAttribute('data-id');
     const itemprice = parseInt(parent.getAttribute('data-price'));
     const itemname = parent.getAttribute('data-name');
@@ -256,8 +255,6 @@ if (searchInput) {
 //شمارنده
 function isvalue(el) {
     let rect = el.getBoundingClientRect();
-    console.log("وضعیت نمایش:", rect.top, rect.bottom); // برای تست
-    console.log('scrool')
     return rect.top >= 0 && rect.bottom <= window.innerHeight;
 }
 
@@ -269,7 +266,6 @@ function startcounts(count) {
     }
 
     let trget = parseInt(count.getAttribute("data-target"));
-    console.log(trget);
     let num = 0;
     speed = Math.max(50, 2000 / trget);
 
@@ -284,7 +280,6 @@ function startcounts(count) {
 
 function check() {
     let counts = document.querySelectorAll('#count');
-    console.log(counts);
     counts.forEach(count => {
         if (isvalue(count)) {
             startcounts(count);
