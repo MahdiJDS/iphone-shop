@@ -253,53 +253,6 @@ if (searchInput) {
 }
 
 
-
-search.addEventListener('keyup', () => {
-    const query = search.value.toLowerCase();
-    console.log(query);
-    sugest.innerHTML = '';
-    sugest.style.display = 'none';
-
-
-    if (query) {
-        const fillproduct = Products.filter(Product =>
-            Product.toLowerCase().startsWith(query)
-        );
-        console.log(fillproduct);
-
-        if (fillproduct.length > 0) {
-            sugest.style.display = 'block';
-            fillproduct.forEach(Product => {
-                const li = document.createElement('li');
-                li.textContent = Product;
-                console.log(li.textContent);
-                li.addEventListener('click', () => {
-                    console.log('clicked');
-                    search.value = Product;
-                    sugest.innerHTML = '';
-                    sugest.style.display = 'none';
-                    scrolling(Product);
-                });
-                sugest.appendChild(li);
-            })
-        }
-    }
-});
-
-function scrolling(productId) {
-    let section = document.getElementById(productId);
-    console.log(section);
-    if (section) {
-        sections.forEach(sec => {
-        });
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
-
-
-    }
-    console.log('done');
-
-}
-
 //شمارنده
 function isvalue(el) {
     let rect = el.getBoundingClientRect();
