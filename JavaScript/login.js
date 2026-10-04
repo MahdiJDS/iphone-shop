@@ -81,7 +81,6 @@ function handleLogin(event) {
   if (storedPassword === password) {
     messageEl.textContent = 'ورود موفقیت‌آمیز بود!';
     localStorage.setItem('isloginA', 'true');
-
     setTimeout(() => {
       window.location.href = 'index.html';
     }, 1000);
@@ -91,7 +90,7 @@ function handleLogin(event) {
 }
 
 
-btnlogin.addEventListener('click', loginf);
+btnlogin.addEventListener('click', handleLogin);
 
 //سانسور شماره   
 function validateAndMaskPhone() {
