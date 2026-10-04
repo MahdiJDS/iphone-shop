@@ -1,3 +1,15 @@
+function getCart() {
+  try {
+    return JSON.parse(localStorage.getItem('cart')) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
 function renderCart() {
   const cartContainer = document.querySelector('.cart-contact');
   const totalPriceEl = document.querySelector('.cart-price');
@@ -58,62 +70,62 @@ function renderCart() {
 }
 
 function removeitem(itemid) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart = cart.filter(item => item.id !== itemid);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    show();
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart = cart.filter(item => item.id !== itemid);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  show();
 }
 
 function update(itemid, chang) {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    let up = cart.find(item => item.id === itemid);
-    if (up) {
-        up.query += chang;
-    }
-    if (up.query <= 0) {
-        cart = cart.filter(item => item.id !== itemid)
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    show();
+  let up = cart.find(item => item.id === itemid);
+  if (up) {
+    up.query += chang;
+  }
+  if (up.query <= 0) {
+    cart = cart.filter(item => item.id !== itemid)
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  show();
 
 }
 
 function tasvie() {
-    cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let total = 0;
-    cart.forEach(item => {
-        if (item.query >= 1) {
-            total += item.price * item.query;
-        }
-    })
-    alert(`Thank you 
+  cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let total = 0;
+  cart.forEach(item => {
+    if (item.query >= 1) {
+      total += item.price * item.query;
+    }
+  })
+  alert(`Thank you 
             خرید شما ${total} تومان`);
 
-    show();
+  show();
 
-    setTimeout(() => {
-        window.location.href = "BS.html"
-    }, 1200)
+  setTimeout(() => {
+    window.location.href = "BS.html"
+  }, 1200)
 }
 
 
-show();
+// show();
 function loadA() {
-    const can = document.querySelectorAll('.can');
-    console.log(can)
-    const windos = window.innerHeight;
-    console.log(windos)
+  const can = document.querySelectorAll('.can');
+  console.log(can)
+  const windos = window.innerHeight;
+  console.log(windos)
 
-    can.forEach(sec => {
-        const root = sec.getBoundingClientRect();
-        console.log(root)
-        if (root.top <= windos - 50 && root.bottom >= 50) {
-            let test = sec.classList.add('show');
-            console.log(`test ${test}`);
-        }
+  can.forEach(sec => {
+    const root = sec.getBoundingClientRect();
+    console.log(root)
+    if (root.top <= windos - 50 && root.bottom >= 50) {
+      let test = sec.classList.add('show');
+      console.log(`test ${test}`);
+    }
 
-    });
+  });
 }
 window.addEventListener('load', loadA); // برای لود صفحه
 window.addEventListener('scroll', loadA); // برای اسکرول
