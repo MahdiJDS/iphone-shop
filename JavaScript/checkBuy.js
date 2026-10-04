@@ -14,8 +14,9 @@ function renderCart() {
   const cartContainer = document.querySelector('.cart-contact');
   const totalPriceEl = document.querySelector('.cart-price');
 
-  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  if (!cartContainer || !totalPriceEl) return;
 
+  const cartItems = getCart();
   cartContainer.innerHTML = '';
 
   if (cartItems.length === 0) {
@@ -27,48 +28,48 @@ function renderCart() {
   let totalPrice = 0;
 
   cartItems.forEach(item => {
-    if (item.quantity < 1) return;
+    const quantity = Number(item.quantity);
+    const price = Number(item.price);
 
-    totalPrice += item.price * item.quantity;
+    if (!Number.isFinite(quantity) || quantity < 1) return;
+    if (!Number.isFinite(price) || price < 0) return;
+
+    totalPrice += price * quantity;
 
     const card = document.createElement('div');
     card.className = 'card p-3 text-center m-3';
 
-    card.innerHTML = `
-      <div class="d-flex justify-content-center align-items-center gap-2">
-        <button
-          class="btn btn-outline-danger"
-          onclick="removeItem('${item.id}')"
-        >
-          حذف
-        </button>
+    const details = document.createElement('p');
+    details.className = 'm-0';
+    details.textContent =
+      `${item.name} - قیمت: ${price} - تعداد: ${quantity}`;
 
-        <p class="m-0">
-          ${item.name} - قیمت: ${item.price} - تعداد: ${item.quantity}
-        </p>
+    const controls = document.createElement('div');
+    controls.className =
+      'd-flex justify-content-center align-items-center gap-2';
 
-        <button
-          class="btn btn-outline-primary"
-          onclick="updateItem('${item.id}', 1)"
-        >
-          +
-        </button>
+    const removeButton = document.createElement('button');
+    removeButton.className = 'btn btn-outline-danger';
+    removeButton.textContent = 'حذف';
+    removeButton.addEventListener('click', () => removeItem(item.id));
 
-        <button
-          class="btn btn-outline-info"
-          onclick="updateItem('${item.id}', -1)"
-        >
-          -
-        </button>
-      </div>
-    `;
+    const increaseButton = document.createElement('button');
+    increaseButton.className = 'btn btn-outline-primary';
+    increaseButton.textContent = '+';
+    increaseButton.addEventListener('click', () => updateItem(item.id, 1));
 
+    const decreaseButton = document.createElement('button');
+    decreaseButton.className = 'btn btn-outline-info';
+    decreaseButton.textContent = '-';
+    decreaseButton.addEventListener('click', () => updateItem(item.id, -1));
+
+    controls.append(removeButton, details, increaseButton, decreaseButton);
+    card.appendChild(controls);
     cartContainer.appendChild(card);
   });
 
-  totalPriceEl.textContent = `مجموع قیمت = ${totalPrice}`;
+  totalPriceEl.textContent = `مجموع قیمت = ${totalPrice} تومان`;
 }
-
 function removeitem(itemid) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   cart = cart.filter(item => item.id !== itemid);
