@@ -17,8 +17,6 @@ function renderCart() {
   if (!cartContainer || !totalPriceEl) return;
 
   const cartItems = getCart();
-  console.log(cartItems)
-  console.log(cartItems.length)
   cartContainer.innerHTML = '';
 
   if (cartItems.length == 0) {
@@ -32,8 +30,6 @@ function renderCart() {
   cartItems.forEach(item => {
     const query = Number(item.query);
     const price = Number(item.price);
-
-    console.log(query , price)
 
     if (!Number.isFinite(query) || query < 1) return;
     if (!Number.isFinite(price) || price < 0) return;
@@ -89,7 +85,6 @@ function updateItem(itemId, change) {
   if (!item) return;
 
   item.query += change;
-  console.log(item , change , item.query)
 
   const updatedCart = cart.filter(product => product.query > 0);
 
@@ -115,16 +110,12 @@ function tasvie() {
 }
 
 
-// show();
 function loadA() {
   const can = document.querySelectorAll('.can');
-  console.log(can)
   const windos = window.innerHeight;
-  console.log(windos)
 
   can.forEach(sec => {
     const root = sec.getBoundingClientRect();
-    console.log(root)
     if (root.top <= windos - 50 && root.bottom >= 50) {
       let test = sec.classList.add('show');
       console.log(`test ${test}`);
