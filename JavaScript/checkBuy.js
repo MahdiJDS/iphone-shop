@@ -70,11 +70,12 @@ function renderCart() {
 
   totalPriceEl.textContent = `مجموع قیمت = ${totalPrice} تومان`;
 }
-function removeitem(itemid) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart = cart.filter(item => item.id !== itemid);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  show();
+function removeItem(itemId) {
+  const cart = getCart();
+  const updatedCart = cart.filter(item => item.id !== itemId);
+
+  saveCart(updatedCart);
+  renderCart();
 }
 
 function update(itemid, chang) {
