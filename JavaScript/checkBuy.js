@@ -82,21 +82,20 @@ function removeItem(itemId) {
   renderCart();
 }
 
-function update(itemid, chang) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+function updateItem(itemId, change) {
+  const cart = getCart();
+  const item = cart.find(product => product.id === itemId);
 
-  let up = cart.find(item => item.id === itemid);
-  if (up) {
-    up.query += chang;
-  }
-  if (up.query <= 0) {
-    cart = cart.filter(item => item.id !== itemid)
-  }
-  localStorage.setItem("cart", JSON.stringify(cart));
-  show();
+  if (!item) return;
 
+  item.query += change;
+  console.log(item , change , item.query)
+
+  const updatedCart = cart.filter(product => product.query > 0);
+
+  saveCart(updatedCart);
+  renderCart();
 }
-
 function tasvie() {
   cart = JSON.parse(localStorage.getItem("cart")) || [];
   let total = 0;
