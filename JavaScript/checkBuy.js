@@ -17,9 +17,11 @@ function renderCart() {
   if (!cartContainer || !totalPriceEl) return;
 
   const cartItems = getCart();
+  console.log(cartItems)
+  console.log(cartItems.length)
   cartContainer.innerHTML = '';
 
-  if (cartItems.length === 0) {
+  if (cartItems.length == 0) {
     cartContainer.innerHTML = '<p class="fw-bold">سبد خالی می‌باشد</p>';
     totalPriceEl.textContent = '';
     return;
@@ -28,13 +30,15 @@ function renderCart() {
   let totalPrice = 0;
 
   cartItems.forEach(item => {
-    const quantity = Number(item.quantity);
+    const query = Number(item.query);
     const price = Number(item.price);
 
-    if (!Number.isFinite(quantity) || quantity < 1) return;
+    console.log(query , price)
+
+    if (!Number.isFinite(query) || query < 1) return;
     if (!Number.isFinite(price) || price < 0) return;
 
-    totalPrice += price * quantity;
+    totalPrice += price * query;
 
     const card = document.createElement('div');
     card.className = 'card p-3 text-center m-3';
@@ -42,7 +46,7 @@ function renderCart() {
     const details = document.createElement('p');
     details.className = 'm-0';
     details.textContent =
-      `${item.name} - قیمت: ${price} - تعداد: ${quantity}`;
+      `${item.name} - قیمت: ${price} - تعداد: ${query}`;
 
     const controls = document.createElement('div');
     controls.className =
@@ -131,4 +135,4 @@ function loadA() {
 }
 window.addEventListener('load', loadA); // برای لود صفحه
 window.addEventListener('scroll', loadA); // برای اسکرول
-loadA();
+renderCart();
