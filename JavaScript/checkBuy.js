@@ -91,22 +91,32 @@ function updateItem(itemId, change) {
   saveCart(updatedCart);
   renderCart();
 }
-function tasvie() {
-  cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let total = 0;
-  cart.forEach(item => {
-    if (item.query >= 1) {
-      total += item.price * item.query;
-    }
-  })
-  alert(`Thank you 
-            خرید شما ${total} تومان`);
 
-  show();
+function tasvie() {
+  const cart = getCart();
+
+  if (cart.length === 0) {
+    alert('سبد خرید شما خالی است');
+    return;
+  }
+
+  const total = cart.reduce((sum, item) => {
+    const quantity = Number(item.query);
+    const price = Number(item.price);
+
+    if (quantity < 1 || !Number.isFinite(price)) return sum;
+
+    return sum + price * quantity;
+  }, 0);
+
+  alert(`Thank you\nخرید شما ${total} تومان`);
+
+  localStorage.removeItem('cart');
+  renderCart();
 
   setTimeout(() => {
-    window.location.href = "BS.html"
-  }, 1200)
+    window.location.href = 'index.html';
+  }, 1200);
 }
 
 
