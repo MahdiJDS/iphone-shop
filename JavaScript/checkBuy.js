@@ -119,20 +119,20 @@ function tasvie() {
   }, 1200);
 }
 
-
 function loadA() {
-  const can = document.querySelectorAll('.can');
-  const windos = window.innerHeight;
+  const elements = document.querySelectorAll('.can');
 
-  can.forEach(sec => {
-    const root = sec.getBoundingClientRect();
-    if (root.top <= windos - 50 && root.bottom >= 50) {
-      let test = sec.classList.add('show');
-      console.log(`test ${test}`);
-    }
-
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        observer.unobserve(entry.target);
+      }
+    });
   });
+
+  elements.forEach(element => observer.observe(element));
 }
-window.addEventListener('load', loadA); // برای لود صفحه
-window.addEventListener('scroll', loadA); // برای اسکرول
+
+window.addEventListener('DOMContentLoaded', loadA);
 renderCart();
