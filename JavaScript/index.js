@@ -77,6 +77,26 @@ loginButtons.forEach((btn) => {
     });
 });
 
+const buyBtn = document.getElementById('buyBtn');
+
+if (buyBtn) {
+
+    buyBtn.addEventListener('click', () => {
+
+        const isLoggedIn =
+            localStorage.getItem('isloginA') === 'true';
+
+        if (isLoggedIn) {
+            window.location.href = 'checkBuy.html';
+        } else {
+            alert('ابتدا وارد حساب کاربری شوید');
+            window.location.href = 'login.html';
+        }
+
+    });
+
+}
+
 
 //تایپو گرافی
 const type = document.querySelector('.typing');
