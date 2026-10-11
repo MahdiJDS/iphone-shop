@@ -98,6 +98,19 @@ if (buyBtn) {
 }
 
 
+const singBtn = document.getElementById('singBtn');
+
+if (singBtn) {
+
+    const isLoggedIn =
+        localStorage.getItem('isloginA') === 'true';
+
+    if (isLoggedIn) {
+        singBtn.classList.add('d-none');
+    }
+
+}
+
 //تایپو گرافی
 const type = document.querySelector('.typing');
 const menu = ["iPHone 16", "iPHone 16 Pro", "iPHone 16 Pro Max"];
