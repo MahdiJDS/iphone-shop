@@ -152,8 +152,7 @@ const progressBar = document.getElementById('progress-bar');
 function BarScroll() {
     const topsrtoll = window.scrollY;
     const higthscroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-    if (scrollableHeight <= 0) {
+    if (higthscroll <= 0) {
         progressBar.style.width = '0%';
         return;
     }
