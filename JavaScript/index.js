@@ -70,7 +70,6 @@ loginButtons.forEach((btn) => {
             localStorage.getItem('isloginA') === 'true';
 
         if (!isLoggedIn) {
-            alert('ثبت‌نام نکرده‌اید');
             window.location.href = 'login.html';
         }
 
