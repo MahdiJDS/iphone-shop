@@ -147,6 +147,22 @@ function deletWord() {
 typeWord();
 
 
+
+const typing = document.querySelector('.typing');
+
+if (typing) {
+    const observer = new MutationObserver(() => {
+        typing.scrollLeft = typing.scrollWidth;
+    });
+
+    observer.observe(typing, {
+        childList: true,
+        characterData: true,
+        subtree: true
+    });
+}
+
+
 //اسکرول فعلی
 const progressBar = document.getElementById('progress-bar');
 function BarScroll() {
