@@ -33,12 +33,18 @@
     border-radius: 20px;
 }
 
+#nav {
+    z-index: 1030;
+    width: 100%;
+    background-color: #fff;
+    transition: transform 0.3s ease-in-out;
+}
+
 .nav_hid {
     transform: translateY(-100%);
     pointer-events: none;
     transition: transform 0.3s ease-in-out;
 }
-
 .nav_vis {
     transform: translateY(0%);
     pointer-events: painted;
