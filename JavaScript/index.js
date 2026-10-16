@@ -181,6 +181,7 @@ window.addEventListener('scroll', BarScroll);
 
 
 //نوبار متعییر
+
 const nav = document.getElementById('nav');
 
 let lastScrollY = window.scrollY;
@@ -193,15 +194,18 @@ function updateNavbar() {
     const currentScrollY = window.scrollY;
 
     if (currentScrollY <= 0) {
-        nav.classList.remove('hidden');
+        nav.classList.remove('nav_hid');
+        nav.classList.add('nav_vis');
         lastScrollY = 0;
         return;
     }
 
     if (currentScrollY > lastScrollY) {
-        nav.classList.add('hidden');
-    } else {
-        nav.classList.remove('hidden');
+        nav.classList.add('nav_hid');
+        nav.classList.remove('nav_vis');
+    } else if (currentScrollY < lastScrollY) {
+        nav.classList.remove('nav_hid');
+        nav.classList.add('nav_vis');
     }
 
     lastScrollY = currentScrollY;
