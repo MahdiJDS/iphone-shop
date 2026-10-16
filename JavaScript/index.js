@@ -328,7 +328,7 @@ function startcounts(count) {
 }
 
 function check() {
-    let counts = document.querySelectorAll('#count');
+    let counts = document.querySelectorAll('.count');
     counts.forEach(count => {
         if (isvalue(count)) {
             startcounts(count);
