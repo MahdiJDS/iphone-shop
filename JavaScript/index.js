@@ -308,13 +308,17 @@ function isvalue(el) {
 }
 
 function startcounts(count) {
-    if (count.dataset.started) {
+    if (count.dataset.started === true) {
         return;
-    } else {
-        count.dataset.started = "true";
     }
 
     let trget = parseInt(count.getAttribute("data-target"));
+    if (!Number.isFinite(trget) || trget < 0) {
+        return;
+    }
+
+    count.dataset.started = "true";
+
     let num = 0;
     speed = Math.max(50, 2000 / trget);
 
@@ -329,6 +333,7 @@ function startcounts(count) {
 
 function check() {
     let counts = document.querySelectorAll('.count');
+    console.log(counts)
     counts.forEach(count => {
         if (isvalue(count)) {
             startcounts(count);
