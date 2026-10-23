@@ -300,7 +300,6 @@ if (searchInput) {
     searchInput.addEventListener('input', handleSearch);
 }
 
-
 //شمارنده
 function isvalue(el) {
     let rect = el.getBoundingClientRect();
@@ -319,6 +318,7 @@ function startcounts(count) {
 
     count.dataset.started = "true";
 
+
     let num = 0;
     const speed = Math.max(50, 2000 / trget);
 
@@ -333,9 +333,8 @@ function startcounts(count) {
 
 function check() {
     let counts = document.querySelectorAll('.count');
-    console.log(counts)
     counts.forEach(count => {
-        if (isvalue(count)) {
+        if (isvalue(count) && count.dataset.started !== "true") {
             startcounts(count);
         }
     })
