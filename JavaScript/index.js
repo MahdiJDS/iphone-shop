@@ -323,7 +323,7 @@ function startcounts(count) {
     const speed = Math.max(50, 2000 / trget);
 
     let set = setInterval(() => {
-        count.innerHTML = num;
+        count.textContent = num;
         if (num >= trget) {
             clearInterval(set);
         }
