@@ -320,7 +320,7 @@ function startcounts(count) {
     count.dataset.started = "true";
 
     let num = 0;
-    speed = Math.max(50, 2000 / trget);
+    const speed = Math.max(50, 2000 / trget);
 
     let set = setInterval(() => {
         count.innerHTML = num;
