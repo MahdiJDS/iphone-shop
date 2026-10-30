@@ -1,12 +1,11 @@
 // DOM
-const sil = document.querySelector('.col-md-12');
-let loginF = document.getElementById('loginF');
-let regasterF = document.getElementById('regasterF');
-const swich = document.querySelectorAll('.swich');
-const btnlogin = document.getElementById('btnL');
-const btnregaster = document.getElementById('btnR');
-let pL = document.getElementById('pL');
-let pR = document.getElementById('pR');
+const  sloginForm = document.getElementById('loginF');
+const registerForm = document.getElementById('regasterF');
+
+const switchButtons = document.querySelectorAll('.swich');
+
+const loginButton = document.getElementById('btnL');
+const registerButton = document.getElementById('btnR');
 let event = 0;
 function Toggle() {
     loginF.classList.toggle('hidden');
