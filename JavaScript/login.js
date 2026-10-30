@@ -6,7 +6,7 @@ const switchButtons = document.querySelectorAll('.swich');
 
 const loginButton = document.getElementById('btnL');
 const registerButton = document.getElementById('btnR');
-let event = 0;
+
 function Toggle() {
     loginF.classList.toggle('hidden');
     loginF.classList.toggle('show');
@@ -19,7 +19,9 @@ swich.forEach((btn) => {
     btn.addEventListener('click', Toggle);
 });
 
-
+function isValidPhone(phone) {
+    return /^09\d{9}$/.test(phone);
+}
 
 // Register
 function handleRegister(event) {
@@ -37,7 +39,7 @@ function handleRegister(event) {
   const PHONE_REGEX = /^09\d{9}$/;
 
   // Validation
-  if (!username || !password || !PHONE_REGEX.test(phone)) {
+  if (!username || !password || !isValidPhone(phone)) {
     messageEl.textContent = 'لطفاً همه فیلدها را به‌درستی پر کنید!';
     return;
   }
@@ -93,24 +95,24 @@ btnlogin.addEventListener('click', handleLogin);
 
 //سانسور شماره   
 function validateAndMaskPhone() {
-  const phoneInput = document.getElementById('phone');
-  const phoneNumber = phoneInput.value.trim();
+    const phoneInput = document.getElementById('phone');
 
-  const PHONE_REGEX = /^09\d{9}$/;
-  const isValidPhone = PHONE_REGEX.test(phoneNumber);
+    if (!phoneInput) {
+        return;
+    }
 
-  console.log('Phone valid:', isValidPhone);
+    const phoneNumber = phoneInput.value.trim();
 
-  if (!isValidPhone) {
-    alert('شماره تلفن معتبر وارد کنید!');
-    phoneInput.focus();
-    return;
-  }
+    if (!isValidPhone(phoneNumber)) {
+        alert('شماره تلفن معتبر وارد کنید!');
+        phoneInput.focus();
+        return;
+    }
 
-  const maskedPhone = phoneNumber.replace(
-    /(\d{4})\d{3}(\d{4})/,
-    '$1***$2'
-  );
+    const maskedPhone = phoneNumber.replace(
+        /(\d{4})\d{3}(\d{4})/,
+        '$1***$2'
+    );
 
-  alert(maskedPhone);
+    alert(maskedPhone);
 }
