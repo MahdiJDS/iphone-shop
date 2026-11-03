@@ -1,5 +1,5 @@
 // DOM
-const  sloginForm = document.getElementById('loginF');
+const sloginForm = document.getElementById('loginF');
 const registerForm = document.getElementById('regasterF');
 
 const switchButtons = document.querySelectorAll('.swich');
@@ -8,19 +8,19 @@ const loginButton = document.getElementById('btnL');
 const registerButton = document.getElementById('btnR');
 
 function Toggle() {
-    loginF.classList.toggle('hidden');
-    loginF.classList.toggle('show');
-    regasterF.classList.toggle('hidden');
-    regasterF.classList.toggle('show');
+  loginF.classList.toggle('hidden');
+  loginF.classList.toggle('show');
+  regasterF.classList.toggle('hidden');
+  regasterF.classList.toggle('show');
 }
 
 // Switch Forms
 swich.forEach((btn) => {
-    btn.addEventListener('click', Toggle);
+  btn.addEventListener('click', Toggle);
 });
 
 function isValidPhone(phone) {
-    return /^09\d{9}$/.test(phone);
+  return /^09\d{9}$/.test(phone);
 }
 
 // Register
@@ -36,7 +36,6 @@ function handleRegister(event) {
   const password = passwordInput.value.trim();
   const phone = phoneInput.value.trim();
 
-  const PHONE_REGEX = /^09\d{9}$/;
 
   // Validation
   if (!username || !password || !isValidPhone(phone)) {
@@ -58,8 +57,9 @@ function handleRegister(event) {
   setTimeout(Toggle, 1000);
 }
 
-btnregaster.addEventListener('click', handleRegister);
-
+if (registerFormElement) {
+  registerFormElement.addEventListener('submit', handleRegister);
+}
 
 // Login
 function handleLogin(event) {
@@ -91,28 +91,29 @@ function handleLogin(event) {
 }
 
 
-btnlogin.addEventListener('click', handleLogin);
-
+if (loginFormElement) {
+  loginFormElement.addEventListener('submit', handleLogin);
+}
 //سانسور شماره   
 function validateAndMaskPhone() {
-    const phoneInput = document.getElementById('phone');
+  const phoneInput = document.getElementById('phone');
 
-    if (!phoneInput) {
-        return;
-    }
+  if (!phoneInput) {
+    return;
+  }
 
-    const phoneNumber = phoneInput.value.trim();
+  const phoneNumber = phoneInput.value.trim();
 
-    if (!isValidPhone(phoneNumber)) {
-        alert('شماره تلفن معتبر وارد کنید!');
-        phoneInput.focus();
-        return;
-    }
+  if (!isValidPhone(phoneNumber)) {
+    alert('شماره تلفن معتبر وارد کنید!');
+    phoneInput.focus();
+    return;
+  }
 
-    const maskedPhone = phoneNumber.replace(
-        /(\d{4})\d{3}(\d{4})/,
-        '$1***$2'
-    );
+  const maskedPhone = phoneNumber.replace(
+    /(\d{4})\d{3}(\d{4})/,
+    '$1***$2'
+  );
 
-    alert(maskedPhone);
+  alert(maskedPhone);
 }
