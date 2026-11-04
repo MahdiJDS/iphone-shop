@@ -43,15 +43,15 @@ function handleRegister(event) {
     return;
   }
 
-  // Check existing user
-  if (localStorage.getItem(username)) {
+  const userKey = `user:${username}`;
+
+  if (localStorage.getItem(userKey) !== null) {
     messageEl.textContent = `کاربر ${username} قبلاً ثبت شده است!`;
-    setTimeout(Toggle, 1000);
     return;
   }
 
-  // Save user
-  localStorage.setItem(username, password);
+  localStorage.setItem(userKey, password);
+
   messageEl.textContent = `کاربر ${username} با موفقیت ثبت شد!`;
 
   setTimeout(Toggle, 1000);
