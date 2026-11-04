@@ -77,7 +77,9 @@ function handleLogin(event) {
     return;
   }
 
-  const storedPassword = localStorage.getItem(username);
+  const userKey = `user:${username}`;
+
+  const storedPassword = localStorage.getItem(userKey);
 
   if (storedPassword === password) {
     messageEl.textContent = 'ورود موفقیت‌آمیز بود!';
