@@ -37,6 +37,13 @@ function saveUser(username, password) {
   return true;
 }
 
+// دریافت رمز ذخیره‌شده کاربر
+function getUserPassword(username) {
+  const userKey = getUserKey(username);
+
+  return localStorage.getItem(userKey);
+}
+
 function isValidPhone(phone) {
   return /^09\d{9}$/.test(phone);
 }
