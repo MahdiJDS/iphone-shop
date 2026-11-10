@@ -24,6 +24,19 @@ function getUserKey(username) {
   return `user:${username.trim()}`;
 }
 
+// ذخیره کاربر
+function saveUser(username, password) {
+  const userKey = getUserKey(username);
+
+  if (localStorage.getItem(userKey) !== null) {
+    return false;
+  }
+
+  localStorage.setItem(userKey, password);
+
+  return true;
+}
+
 function isValidPhone(phone) {
   return /^09\d{9}$/.test(phone);
 }
