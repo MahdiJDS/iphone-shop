@@ -1,6 +1,6 @@
 // DOM
-const sloginForm = document.getElementById('loginF');
-const registerForm = document.getElementById('regasterF');
+const loginFormElement = document.getElementById('loginF');
+const registerFormElement = document.getElementById('regasterF');
 
 const switchButtons = document.querySelectorAll('.swich');
 
@@ -15,7 +15,7 @@ function Toggle() {
 }
 
 // Switch Forms
-swich.forEach((btn) => {
+switchButtons.forEach((btn) => {
   btn.addEventListener('click', Toggle);
 });
 
