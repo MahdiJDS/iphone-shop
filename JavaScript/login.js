@@ -19,6 +19,11 @@ switchButtons.forEach((btn) => {
   btn.addEventListener('click', Toggle);
 });
 
+// ساخت کلید اختصاصی کاربر
+function getUserKey(username) {
+  return `user:${username.trim()}`;
+}
+
 function isValidPhone(phone) {
   return /^09\d{9}$/.test(phone);
 }
