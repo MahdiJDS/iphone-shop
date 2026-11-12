@@ -68,14 +68,14 @@ function handleRegister(event) {
     return;
   }
 
-  const userKey = `user:${username}`;
 
-  if (localStorage.getItem(userKey) !== null) {
+  // ذخیره کاربر
+  const isUserSaved = saveUser(username, password);
+
+  if (!isUserSaved) {
     messageEl.textContent = `کاربر ${username} قبلاً ثبت شده است!`;
     return;
   }
-
-  localStorage.setItem(userKey, password);
 
   messageEl.textContent = `کاربر ${username} با موفقیت ثبت شد!`;
 
