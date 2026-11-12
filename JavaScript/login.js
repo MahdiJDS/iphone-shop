@@ -102,9 +102,9 @@ function handleLogin(event) {
     return;
   }
 
-  const userKey = `user:${username}`;
 
-  const storedPassword = localStorage.getItem(userKey);
+  // دریافت رمز ذخیره‌شده کاربر
+  const storedPassword = getUserPassword(username);
 
   if (storedPassword === password) {
     messageEl.textContent = 'ورود موفقیت‌آمیز بود!';
